@@ -14,6 +14,7 @@ var (
 	// Use when the expression has number of operands not equal to two
 	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 	array []string
+	a,b int
 )
 
 // Implement a function that computes the sum of two int numbers written as a string
@@ -48,7 +49,9 @@ func StringSum(input string) (output string, err error) {
 		if err != nil {
 			return "", fmt.Errorf("Invalid operand 2")
 		}
-		return strconv.Itoa(a+b), nil
 	}
-	return "", nil
+	if len(array) != 2 {
+		return "", fmt.Errorf("%w", fmt.Errorf("%w", errorNotTwoOperands))
+	}
+	return strconv.Itoa(a+b), nil
 }
