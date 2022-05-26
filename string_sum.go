@@ -53,7 +53,7 @@ func OPERANDS(string1, string2 string) bool {
 		return true
 	}
 	Plus2 := strings.LastIndex(string2, "+")
-	return Plus2 <= 0
+	return Plus2 >= 0
 }
 func COMPUTE(string1, string2 string) (string,error) {
 	if !OPERANDS(string1, string2) {
