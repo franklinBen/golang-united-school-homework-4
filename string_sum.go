@@ -45,12 +45,12 @@ func OPERANDS(string1, string2 string) bool {
 		return false
 	}
 	string2Minus := strings.LastIndex(string2, "-")
-	if string2Minus < 0 {
+	if string2Minus > 0 {
 		return false
 	}
 	Plus1 := strings.LastIndex(string1, "+")
 	if Plus1 > 0 {
-		return false
+		return true
 	}
 	Plus2 := strings.LastIndex(string2, "+")
 	return Plus2 <= 0
