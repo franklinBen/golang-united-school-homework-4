@@ -32,7 +32,6 @@ func StringSum(input string) (output string, err error) {
 	input = strings.ReplaceAll(input,"\v", "")
 	input = strings.ReplaceAll(input,"\r", "")
 	input = strings.ReplaceAll(input,"\f", "")
-	input = strings.ReplaceAll(input," ",  "")
 	if input == "" {
 		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
