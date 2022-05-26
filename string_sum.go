@@ -2,6 +2,9 @@ package string_sum
 
 import (
 	"errors"
+	"fmt"
+	"strconv"
+	"strings"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -10,6 +13,7 @@ var (
 	errorEmptyInput = errors.New("input is empty")
 	// Use when the expression has number of operands not equal to two
 	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
+	array []string
 )
 
 // Implement a function that computes the sum of two int numbers written as a string
@@ -23,5 +27,31 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-	return "", nil
+	input = strings.ReplaceAll(input,"\n", "")
+	input = strings.ReplaceAll(input,"\t", "")
+	input = strings.ReplaceAll(input,"\v", "")
+	input = strings.ReplaceAll(input,"\r", "")
+	input = strings.ReplaceAll(input,"\f", "")
+	input = strings.ReplaceAll(input," ",  "")
+	if input == "" {
+		return "", fmt.Errorf("%w", errorEmptyInput)
+	}
+	if strings.Contains(input, "+") || strings.Contains(input, "-") {
+		array = strings.Split(input, "+")
+		if len(array) == 1 {
+			return "", fmt.Errorf("%w", errorNotTwoOperands)
+		} else {
+			a, err := strconv.Atoi(array[0])
+			if err != nil {
+				return "", fmt.Errorf("Invalid operand 1")
+			}
+			b, err := strconv.Atoi(array[1])
+			if err != nil {
+				return "", fmt.Errorf("Invalid operand 2")
+			}
+			return strconv.Itoa(a+b), nil
+		}
+	} else {
+		return "", fmt.Errorf("Invalid Input, absence of arithmetic operator")
+	}
 }
