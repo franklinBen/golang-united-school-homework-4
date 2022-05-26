@@ -36,22 +36,19 @@ func StringSum(input string) (output string, err error) {
 	if input == "" {
 		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
-	if strings.Contains(input, "+") || strings.Contains(input, "-") {
-		array = strings.Split(input, "+")
-		if len(array) == 1 {
-			return "", fmt.Errorf("%w", errorNotTwoOperands)
-		} else {
-			a, err := strconv.Atoi(array[0])
-			if err != nil {
-				return "", fmt.Errorf("Invalid operand 1")
-			}
-			b, err := strconv.Atoi(array[1])
-			if err != nil {
-				return "", fmt.Errorf("Invalid operand 2")
-			}
-			return strconv.Itoa(a+b), nil
-		}
+	array = strings.Split(input, "+")
+	if len(array) == 1 {
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	} else {
-		return "", fmt.Errorf("Invalid Input, absence of arithmetic operator")
+		a, err := strconv.Atoi(array[0])
+		if err != nil {
+			return "", fmt.Errorf("Invalid operand 1")
+		}
+		b, err := strconv.Atoi(array[1])
+		if err != nil {
+			return "", fmt.Errorf("Invalid operand 2")
+		}
+		return strconv.Itoa(a+b), nil
 	}
+	return "", nil
 }
