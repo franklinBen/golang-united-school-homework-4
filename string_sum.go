@@ -40,16 +40,38 @@ func StringSum(input string) (output string, err error) {
 	if len(array) == 1 {
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
-	a, err := strconv.Atoi(array[0])
-	if err != nil {
-		return "", fmt.Errorf("Invalid operand 1")
-	}
-	b, err := strconv.Atoi(array[1])
-	if err != nil {
-		return "", fmt.Errorf("Invalid operand 2")
-	}
 	if len(array) != 2 {
-		return "", fmt.Errorf("%w", fmt.Errorf("%w", errorNotTwoOperands))
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
-	return strconv.Itoa(a+b), nil
+	return COMPUTE(array[0], array[1])
+}
+func OPERANDS(string1, string2 string) bool {
+	string1Minus := strings.LastIndex(string1, "-")
+	if string1Minus > 0 {
+		return false
+	}
+	string2Minus := strings.LastIndex(string2, "-")
+	if string2Minus > 0 {
+		return false
+	}
+	Plus1 := strings.LastIndex(string1, "+")
+	if Plus1 > 0 {
+		return false
+	}
+	Plus2 := strings.LastIndex(string2, "+")
+	return Plus2 <= 0
+}
+func COMPUTE(string1, string2 string) (string,error) {
+	if !OPERANDS(string1, string2) {
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
+	}
+	op1, error1 := strconv.Atoi(string1)
+	if error1 != nil {
+		return "", fmt.Errorf("%w", error1)
+	}
+	op2, error2 := strconv.Atoi(string2)
+	if error2 != nil {
+		return "", fmt.Errorf("%w", error2)
+	}
+	return strconv.Itoa(op1+op2), nil
 }
